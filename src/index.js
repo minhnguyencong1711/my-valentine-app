@@ -1,17 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import "./index.css"
+import { createRoot } from "react-dom/client"
+import SuccessPage from "./components/success-page"
+import ValentinePage from "./components/valentine-page"
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// Thêm CSS của Tailwind nếu cần
+import "./styles/valentine.css"
+
+const router = createBrowserRouter([
+  {
+    path: "/SuccessPage",
+    element: <SuccessPage />,
+  },
+  {
+    path: "/",
+    element: <ValentinePage />,
+  },
+])
+
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+    <RouterProvider router={router} />
+  </React.StrictMode>,
+)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
