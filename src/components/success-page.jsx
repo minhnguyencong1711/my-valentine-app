@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Heart } from "lucide-react";
 import ChocolateWithImage from "./ChocolateWithImage";
 import myImage from "../assets/myImage.jpg";
+import useAudio from "./useAudio";
 
 const Chocolate = ({ index, totalChocolates, isFormed }) => {
     const getHeartPosition = (i, total) => {
@@ -52,6 +53,7 @@ export default function SuccessPage() {
     const indexRef = useRef(0);
     const modeRef = useRef("typing");
     const lastUpdateTimeRef = useRef(0);
+    const [isPlaying, toggleAudio] = useAudio("/Perfect.mp3");
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -111,6 +113,9 @@ export default function SuccessPage() {
         className="relative min-h-screen w-full bg-gradient-to-br from-[#FFD1E4] to-[#FFAB91]"
         style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}
         >
+            <button onClick={toggleAudio}>
+                {isPlaying ? "🔊" : "🔈"}
+            </button>
             <div className="chocolate-container">{chocolates}</div>
 
         {/* Nội dung chính */}

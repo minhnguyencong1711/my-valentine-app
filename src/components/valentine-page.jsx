@@ -1,8 +1,7 @@
-"use client"
-
 import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import "../styles/valentine.css"
+import useAudio from "./useAudio";
 
 // Component cho thanh socola
 const Chocolate = ({ index, totalChocolates, isFormed }) => {
@@ -52,8 +51,8 @@ const [isHeartFormed, setIsHeartFormed] = useState(true)
 const containerRef = useRef(null)
 const yesButtonRef = useRef(null)
 const navigate = useNavigate()
+const [, toggleAudio] = useAudio("/Perfect.mp3");
 
-// Toggle trạng thái trái tim
 useEffect(() => {
     const interval = setInterval(() => {
     setIsHeartFormed((prev) => !prev)
@@ -70,8 +69,8 @@ const moveNoButton = () => {
 
     const containerRect = containerRef.current.getBoundingClientRect()
     const yesButtonRect = yesButtonRef.current.getBoundingClientRect()
-    const noButtonWidth = 100 // Ước tính chiều rộng nút No
-    const noButtonHeight = 40 // Ước tính chiều cao nút No
+    const noButtonWidth = 100
+    const noButtonHeight = 40
 
     let newX, newY
     let attempts = 0
@@ -107,7 +106,8 @@ useEffect(() => {
 }, [noCount])
 
 const handleYesClick = () => {
-    navigate("/SuccessPage")
+    toggleAudio();
+    navigate("/SuccessPage");
 }
 
 // Tạo các thanh socola
